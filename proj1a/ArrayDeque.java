@@ -71,6 +71,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
+        if(index < 0 || index >= size() || isEmpty()) return null;
         return items[(left + index) % capacity];
     }
     public void resize(int newCapacity) {
