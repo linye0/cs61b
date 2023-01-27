@@ -45,7 +45,7 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return;
         }
         for (int i = left; i != right; i = (i + 1) % capacity) {
@@ -61,7 +61,9 @@ public class ArrayDeque<T> {
         T res = items[left];
         left = (left + 1) % capacity;
         size--;
-        if (isLowUsageRate()) resize((int) (capacity * 0.5));
+        if (isLowUsageRate()) {
+            resize((int) (capacity * 0.5));
+        }
         return res;
     }
 
@@ -71,8 +73,10 @@ public class ArrayDeque<T> {
         }
         right = (right - 1 + capacity) % capacity;
         T res = items[right];
-        size --;
-        if (isLowUsageRate()) resize((int) (capacity * 0.5));
+        size--;
+        if (isLowUsageRate()) {
+            resize((int) (capacity * 0.5));
+        }
         return res;
     }
 
