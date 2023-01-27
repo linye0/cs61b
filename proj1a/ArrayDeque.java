@@ -36,7 +36,7 @@ public class ArrayDeque<T> {
             resize((int) (capacity * 1.5));
         }
         items[right] = item;
-        right = (right + 1) % capacity;
+        right = (right + 1 + capacity) % capacity;
         size++;
     }
 
@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
     }
     public void resize(int newCapacity) {
         T[] newItems = (T[]) new Object[newCapacity];
-        if(left > right) {
+        if(left >= right) {
             System.arraycopy(items, left, newItems, 0, capacity - left);
             System.arraycopy(items, 0, newItems, capacity - left, right);
         }else{
