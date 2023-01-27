@@ -8,22 +8,22 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         left = 0;
         right = 0;
-        items = (T[])new Object[capacity];
+        items = (T[]) new Object[capacity];
         size = 0;
     }
 
     public boolean isEmpty() {
         return size == 0;
     }
-    public boolean isFull() {
+    private boolean isFull() {
         return size == capacity;
     }
 
-    public boolean isLowUsageRate() {
+    private boolean isLowUsageRate() {
         return capacity >= 16 && size() / (double) capacity < 0.25;
     }
     public void addFirst(T item) {
-        if(isFull()) {
+        if (isFull()) {
             resize((int) (capacity * 1.5));
         }
         left = (left - 1 + capacity) % capacity;
@@ -32,7 +32,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if(isFull()) {
+        if (isFull()) {
             resize((int) (capacity * 1.5));
         }
         items[right] = item;
@@ -45,41 +45,49 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        if(isEmpty()) return;
-        for(int i = left; i != right; i = (i + 1) % capacity) {
+        if(isEmpty()) {
+            return;
+        }
+        for (int i = left; i != right; i = (i + 1) % capacity) {
             System.out.print(items[i] + " ");
         }
         System.out.print(items[right]);
     }
 
     public T removeFirst() {
-        if(isEmpty()) return null;
+        if (isEmpty()) {
+            return null;
+        }
         T res = items[left];
         left = (left + 1) % capacity;
         size--;
-        if(isLowUsageRate()) resize((int) (capacity * 0.5));
+        if (isLowUsageRate()) resize((int) (capacity * 0.5));
         return res;
     }
 
     public T removeLast() {
-        if(isEmpty()) return null;
+        if (isEmpty()) {
+            return null;
+        }
         right = (right - 1 + capacity) % capacity;
         T res = items[right];
         size --;
-        if(isLowUsageRate()) resize((int) (capacity * 0.5));
+        if (isLowUsageRate()) resize((int) (capacity * 0.5));
         return res;
     }
 
     public T get(int index) {
-        if(index < 0 || index >= size() || isEmpty()) return null;
+        if (index < 0 || index >= size() || isEmpty()) {
+            return null;
+        }
         return items[(left + index) % capacity];
     }
-    public void resize(int newCapacity) {
+    private void resize(int newCapacity) {
         T[] newItems = (T[]) new Object[newCapacity];
-        if(left >= right) {
+        if (left >= right) {
             System.arraycopy(items, left, newItems, 0, capacity - left);
             System.arraycopy(items, 0, newItems, capacity - left, right);
-        }else{
+        } else {
             System.arraycopy(items, left, newItems, 0, right - left);
         }
         left = 0;
