@@ -7,9 +7,9 @@ public class Palindrome {
         return res;
     }
     public boolean isPalindrome(String word) {
-        Deque d = wordToDeque(word);
-        while(d.size() > 1) {
-            if(d.removeFirst() != d.removeLast()) {
+        Deque<Character> d = wordToDeque(word);
+        while (d.size() > 1) {
+            if (d.removeFirst() != d.removeLast()) {
                 return false;
             }
         }
@@ -18,7 +18,7 @@ public class Palindrome {
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque<Character> d = wordToDeque(word);
-        while(d.size() > 1) {
+        while (d.size() > 1) {
             if (!cc.equalChars(d.removeFirst(), d.removeLast())) {
                 return false;
             }
