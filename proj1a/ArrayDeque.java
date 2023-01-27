@@ -63,8 +63,8 @@ public class ArrayDeque<T> {
 
     public T removeLast() {
         if(isEmpty()) return null;
-        T res = items[right];
         right = (right - 1 + capacity) % capacity;
+        T res = items[right];
         size --;
         if(isLowUsageRate()) resize((int) (capacity * 0.5));
         return res;
