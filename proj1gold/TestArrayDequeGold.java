@@ -1,6 +1,4 @@
 import static org.junit.Assert.*;
-
-import com.sun.org.apache.xpath.internal.operations.String;
 import org.junit.Test;
 
 import java.util.LinkedList;
